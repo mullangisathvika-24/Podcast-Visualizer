@@ -218,14 +218,14 @@ export const ArticleDigest: React.FC<ArticleDigestProps> = ({ theme = "dark", on
               {articles.map((article, index) => (
                 <div
                   key={`${article.headline}-${index}`}
-                  className={`relative rounded-2xl border overflow-hidden ${
+                  className={`relative rounded-2xl overflow-hidden ${
                     theme === "dark"
-                      ? "border-zinc-800 bg-zinc-900/60"
-                      : "border-slate-200 bg-white shadow-sm"
+                      ? "bg-zinc-900/40"
+                      : "bg-white/70"
                   }`}
                 >
                   {/* Left accent bar */}
-                  <div className="absolute inset-y-0 left-0 w-1 bg-brand-purple/70 rounded-l-2xl" />
+                  <div className="absolute inset-y-0 left-0 w-1 bg-brand-purple/60 rounded-l-2xl" />
 
                   <div className="pl-5 pr-4 py-4 sm:pl-6 sm:pr-5 sm:py-5">
                     {/* Header row: number badge + title */}
@@ -294,7 +294,7 @@ export const ArticleDigest: React.FC<ArticleDigestProps> = ({ theme = "dark", on
             </div>
           </div>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
             <button
               type="button"
               onClick={toggleExpanded}
@@ -307,7 +307,7 @@ export const ArticleDigest: React.FC<ArticleDigestProps> = ({ theme = "dark", on
               {isExpanded ? "Read less" : "Read more"}
             </button>
 
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-4">
               {(() => {
                 const YOUTUBE_URL = "https://www.youtube.com/watch?v=UfCuLj-alZM";
                 const SPOTIFY_URL =

@@ -576,32 +576,28 @@ export default function App() {
           ? "text-[#FFFFFF] selection:bg-brand-purple/20 fill-[#FFFFFF]"
           : "text-[#18181B] selection:bg-brand-purple/25"
       }`}
-      style={{ backgroundColor: theme === "dark" ? "#09090f" : "#f9fafb" }}
+      style={{ backgroundColor: theme === "dark" ? "#09090f" : "#f8fafc" }}
     >
-      {/* ── DARK MODE: neon doodle (strong, unchanged) ── */}
-      {theme === "dark" && (
-        <div
-          className="fixed inset-0 w-full h-full pointer-events-none"
-          style={{
-            backgroundImage: "url('/assets/bg-dark.png')",
-            backgroundRepeat: "repeat",
-            backgroundSize: "520px auto",
-            opacity: 0.32,
-            zIndex: 0,
-          }}
-        />
-      )}
-      {theme === "dark" && (
-        <div
-          className="fixed inset-0 w-full h-full pointer-events-none"
-          style={{
-            background: "linear-gradient(160deg, rgba(9,9,20,0.72) 0%, rgba(15,8,35,0.62) 60%, rgba(9,9,20,0.78) 100%)",
-            zIndex: 1,
-          }}
-        />
-      )}
+      {/* ── DARK MODE: neon doodle — strong & unchanged ── */}
       {theme === "dark" && (
         <>
+          <div
+            className="fixed inset-0 w-full h-full pointer-events-none"
+            style={{
+              backgroundImage: "url('/assets/bg-dark.png')",
+              backgroundRepeat: "repeat",
+              backgroundSize: "520px auto",
+              opacity: 0.32,
+              zIndex: 0,
+            }}
+          />
+          <div
+            className="fixed inset-0 w-full h-full pointer-events-none"
+            style={{
+              background: "linear-gradient(160deg, rgba(9,9,20,0.72) 0%, rgba(15,8,35,0.62) 60%, rgba(9,9,20,0.78) 100%)",
+              zIndex: 1,
+            }}
+          />
           <div
             className="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full pointer-events-none"
             style={{ background: "rgba(139,92,246,0.12)", filter: "blur(120px)", zIndex: 2 }}
@@ -613,40 +609,38 @@ export default function App() {
         </>
       )}
 
-      {/* ── LIGHT MODE: soft pastel doodle + white overlay ── */}
-      {/* Layer 1 — gray-100→white gradient base */}
+      {/* ── LIGHT MODE: pencil doodle softened to pastel, subtle gradient overlay ── */}
       {theme === "light" && (
-        <div
-          className="fixed inset-0 w-full h-full pointer-events-none"
-          style={{
-            background: "linear-gradient(160deg, #f3f4f6 0%, #ffffff 55%, #f9fafb 100%)",
-            zIndex: 0,
-          }}
-        />
-      )}
-      {/* Layer 2 — doodle at low opacity; desaturated + brightened to pastel */}
-      {theme === "light" && (
-        <div
-          className="fixed inset-0 w-full h-full pointer-events-none"
-          style={{
-            backgroundImage: "url('/assets/bg-light.png')",
-            backgroundRepeat: "repeat",
-            backgroundSize: "520px auto",
-            opacity: 0.13,
-            filter: "saturate(0.4) brightness(1.15) contrast(0.85)",
-            zIndex: 1,
-          }}
-        />
-      )}
-      {/* Layer 3 — semi-transparent white wash for readability */}
-      {theme === "light" && (
-        <div
-          className="fixed inset-0 w-full h-full pointer-events-none"
-          style={{
-            background: "rgba(255,255,255,0.58)",
-            zIndex: 2,
-          }}
-        />
+        <>
+          {/* Layer 0 — light gray→white base */}
+          <div
+            className="fixed inset-0 w-full h-full pointer-events-none"
+            style={{
+              background: "linear-gradient(150deg, #f1f5f9 0%, #ffffff 50%, #f8fafc 100%)",
+              zIndex: 0,
+            }}
+          />
+          {/* Layer 1 — doodle at pastel opacity (desaturated, bright) */}
+          <div
+            className="fixed inset-0 w-full h-full pointer-events-none"
+            style={{
+              backgroundImage: "url('/assets/bg-light.png')",
+              backgroundRepeat: "repeat",
+              backgroundSize: "520px auto",
+              opacity: 0.18,
+              filter: "saturate(0.25) brightness(1.3) contrast(0.75)",
+              zIndex: 1,
+            }}
+          />
+          {/* Layer 2 — very light white glaze (just enough for readability, not a wall of white) */}
+          <div
+            className="fixed inset-0 w-full h-full pointer-events-none"
+            style={{
+              background: "rgba(255,255,255,0.20)",
+              zIndex: 2,
+            }}
+          />
+        </>
       )}
 
       {/* Primary Toaster element */}

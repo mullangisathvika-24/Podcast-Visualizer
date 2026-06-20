@@ -131,11 +131,11 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
       </div>
 
       {/* 3. Action buttons — always horizontal, equal spacing */}
-      <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+      <div className="flex flex-row flex-wrap items-center justify-center gap-4">
         <button
           type="button"
           onClick={handleDownload}
-          className={`btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium ${
+          className={`btn inline-flex items-center justify-center w-[76px] px-3 py-3 text-sm font-medium rounded-xl ${
             isDark
               ? "btn-dark border-dark-border bg-dark-bg hover:bg-dark-bg/60 text-slate-200"
               : "btn-light border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
@@ -148,7 +148,7 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
         <button
           type="button"
           onClick={handleShare}
-          className={`btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium ${
+          className={`btn inline-flex items-center justify-center w-[76px] px-3 py-3 text-sm font-medium rounded-xl ${
             isDark
               ? "btn-dark border-dark-border bg-dark-bg hover:bg-dark-bg/60 text-slate-200"
               : "btn-light border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
@@ -162,7 +162,7 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
           href={YOUTUBE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium bg-[#FF0000] hover:bg-[#FF0000]/90 border-transparent text-white"
+          className="btn inline-flex items-center justify-center w-[76px] px-3 py-3 text-sm font-medium rounded-xl bg-[#FF0000] hover:bg-[#FF0000]/90 border-transparent text-white"
           aria-label="YouTube"
           title="YouTube"
         >
@@ -173,7 +173,7 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
           href={SPOTIFY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium bg-[#1DB954] hover:bg-[#1DB954]/90 border-transparent text-white"
+          className="btn inline-flex items-center justify-center w-[76px] px-3 py-3 text-sm font-medium rounded-xl bg-[#1DB954] hover:bg-[#1DB954]/90 border-transparent text-white"
           aria-label="Spotify"
           title="Spotify"
         >

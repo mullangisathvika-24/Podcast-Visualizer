@@ -475,7 +475,7 @@ onToast("Download complete.");
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 py-6" id="dashboard-mount">
       <header
-        className={`py-6 border-b ${theme === "dark" ? "border-dark-border" : "border-light-border"} flex flex-col md:flex-row justify-between items-center gap-6 mb-6 transition-all min-w-0 overflow-hidden`}
+        className="py-6 flex flex-col md:flex-row justify-between items-center gap-6 mb-6 transition-all min-w-0 overflow-hidden"
       >
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div>
