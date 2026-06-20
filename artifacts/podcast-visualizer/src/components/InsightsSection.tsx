@@ -92,15 +92,17 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
           isDark ? "border-slate-700 bg-slate-900" : "border-slate-200 bg-slate-50"
         }`}
       >
-        <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-[320px] sm:max-w-none overflow-hidden">
-            <img
-              src={insight.posterFile}
-              alt={insight.subHeadline}
-              className="h-full w-full object-cover object-center"
-              draggable={false}
-            />
-          </div>
+        {/* Poster frame — strictly 4:5 (1080×1350) at all breakpoints, centred, never distorted */}
+        <div
+          className="relative mx-auto overflow-hidden rounded-2xl border border-slate-200 bg-white"
+          style={{ aspectRatio: "4 / 5", width: "100%", maxWidth: "min(420px, 100%)" }}
+        >
+          <img
+            src={insight.posterFile}
+            alt={insight.subHeadline}
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            draggable={false}
+          />
 
           <button
             type="button"
