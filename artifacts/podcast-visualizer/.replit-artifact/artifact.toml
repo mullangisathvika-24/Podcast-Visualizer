@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Podcast Visualizer"
+version = "1.0.0"
+id = "artifacts/podcast-visualizer"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24726
+
+[services.development]
+run = "pnpm --filter @workspace/podcast-visualizer run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/podcast-visualizer", "run", "build" ]
+publicDir = "artifacts/podcast-visualizer/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24726"
+BASE_PATH = "/"

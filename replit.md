@@ -1,36 +1,39 @@
-# [Project name]
+# Podcast Visualizer
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A podcast-to-visual knowledge platform that converts podcast content into visual learning assets — posters, articles, and video thumbnails — with AI-powered generation via Gemini.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/podcast-visualizer run dev` — run the frontend (Vite + React)
+- `pnpm --filter @workspace/api-server run dev` — run the API server (Express)
 - `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- Optional env: `GEMINI_API_KEY` — enables AI podcast generation via Gemini
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React 19 + Vite 7, Tailwind CSS v4
+- API: Express 5 + @google/genai (Gemini)
+- No database — podcasts stored as presets in the API server
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/podcast-visualizer/src/` — React frontend (App.tsx, pages/Dashboard.tsx, components/)
+- `artifacts/api-server/src/routes/podcasts.ts` — GET /api/podcasts + POST /api/generate-podcast
+- `artifacts/podcast-visualizer/public/assets/` — episode artwork images (1.jpg–10.jpg, etc.)
+- `artifacts/podcast-visualizer/src/assets/` — imported assets (video thumbnail.jpg)
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- App is fully client-rendered (Vite SPA); no SSR
+- Preset podcasts are hardcoded in the API server for instant load without a DB
+- AI generation uses Gemini 2.0 Flash with structured JSON output schema
+- Frontend gracefully falls back to local preset data if the API is unavailable
+- Dark/light theme toggle managed via React state; persisted via localStorage
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Users can browse a curated set of business podcast insights visualized as posters, articles, and video thumbnails. They can also generate new podcast visualizations from any topic using Gemini AI.
 
 ## User preferences
 
@@ -38,7 +41,9 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- `GEMINI_API_KEY` must be set in Secrets for AI generation to work; the app works fine without it (presets only)
+- Asset imports in `src/pages/Dashboard.tsx` and `src/components/VideosSection.tsx` use `../assets/` (relative to src/)
+- The `@google/genai` dependency is in `artifacts/api-server`, not in the frontend
 
 ## Pointers
 
