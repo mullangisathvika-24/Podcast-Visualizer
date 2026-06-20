@@ -69,23 +69,24 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
 
   return (
     <section
-      className={`mx-auto flex w-full max-w-5xl flex-col gap-6 rounded-[28px] border p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:p-6 lg:p-8 ${
+      className={`mx-auto flex w-full max-w-[480px] flex-col gap-5 rounded-[28px] border p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:p-5 ${
         isDark ? "border-slate-700 bg-black" : "border-slate-200 bg-white"
       }`}
     >
-      {/* 1. Title */}
+      {/* 1. Title — forced 2-line break at natural midpoint */}
       <h2
-        className={`text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight leading-tight whitespace-normal ${
+        className={`text-lg sm:text-xl md:text-2xl font-bold tracking-tight leading-snug ${
           isDark ? "text-zinc-100" : "text-slate-900"
         }`}
       >
-        {EPISODE_TITLE}
+        From Inspiration to Forbes 30 Under 30 –<br />
+        Apaksh Gupta's Journey
       </h2>
 
-      {/* 2. Poster image — strict 4:5, centred, never distorted */}
+      {/* 2. Poster image — strict 4:5, fills full card width */}
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-2xl border border-slate-200 bg-white"
-        style={{ aspectRatio: "4 / 5", maxWidth: "min(420px, 100%)" }}
+        className="relative w-full overflow-hidden rounded-2xl border border-slate-200 bg-white"
+        style={{ aspectRatio: "4 / 5" }}
       >
         <img
           src={insight.posterFile}
