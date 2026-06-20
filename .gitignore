@@ -5,3 +5,7 @@ build/
 .migration-backup/
 artifacts/
 attached_assets/
+.replit
+.replitignore
+replit.md
+
