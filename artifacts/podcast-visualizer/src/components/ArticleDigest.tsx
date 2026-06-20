@@ -294,7 +294,7 @@ export const ArticleDigest: React.FC<ArticleDigestProps> = ({ theme = "dark", on
             </div>
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-4 pt-1">
             <button
               type="button"
               onClick={toggleExpanded}

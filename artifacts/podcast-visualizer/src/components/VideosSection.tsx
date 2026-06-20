@@ -53,7 +53,7 @@ export const VideosSection: React.FC<VideosSectionProps> = ({
         </div>
 
         {/* Action buttons */}
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-4 w-full">
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-4 w-full">
           <button
             type="button"
             onClick={onDownload}
