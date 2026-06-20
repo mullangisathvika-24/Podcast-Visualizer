@@ -480,7 +480,7 @@ onToast("Download complete.");
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight leading-none text-brand-purple">
-              Welcome to, Podcast Visualizer
+              Podcast Visualizer
             </h1>
           </div>
         </div>

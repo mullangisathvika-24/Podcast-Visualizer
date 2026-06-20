@@ -218,50 +218,71 @@ export const ArticleDigest: React.FC<ArticleDigestProps> = ({ theme = "dark", on
               {articles.map((article, index) => (
                 <div
                   key={`${article.headline}-${index}`}
-                  className={`rounded-2xl shadow-sm border p-4 sm:p-5 ${
+                  className={`relative rounded-2xl border overflow-hidden ${
                     theme === "dark"
-                      ? "border-zinc-800 bg-zinc-800/30"
-                      : "border-slate-200 bg-white"
+                      ? "border-zinc-800 bg-zinc-900/60"
+                      : "border-slate-200 bg-white shadow-sm"
                   }`}
                 >
-                  <h4
-                    className={`text-base font-semibold ${
-                      theme === "dark" ? "text-white" : "text-slate-900"
-                    }`}
-                  >
-                    {article.headline}
-                  </h4>
+                  {/* Left accent bar */}
+                  <div className="absolute inset-y-0 left-0 w-1 bg-brand-purple/70 rounded-l-2xl" />
 
-                  <p
-                    className={`mt-2 text-sm leading-7 ${
-                      theme === "dark" ? "text-zinc-300" : "text-slate-600"
-                    }`}
-                  >
-                    {article.overview}
-                  </p>
-
-                  <div className="mt-3 space-y-3">
-                    {article.bodyParagraphs.map((paragraph, paragraphIndex) => (
-                      <p
-                        key={`${article.headline}-${paragraphIndex}`}
-                        className={`text-sm leading-7 ${
-                          theme === "dark" ? "text-zinc-400" : "text-slate-600"
+                  <div className="pl-5 pr-4 py-4 sm:pl-6 sm:pr-5 sm:py-5">
+                    {/* Header row: number badge + title */}
+                    <div className="flex items-start gap-3">
+                      <span
+                        className={`shrink-0 mt-0.5 inline-flex items-center justify-center h-6 w-6 rounded-full text-[10px] font-black font-mono tracking-wider ${
+                          theme === "dark"
+                            ? "bg-brand-purple/20 text-brand-purple border border-brand-purple/30"
+                            : "bg-brand-purple/10 text-brand-purple border border-brand-purple/20"
                         }`}
                       >
-                        {paragraph}
-                      </p>
-                    ))}
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h4
+                        className={`text-base font-bold leading-snug ${
+                          theme === "dark" ? "text-white" : "text-slate-900"
+                        }`}
+                      >
+                        {article.headline}
+                      </h4>
+                    </div>
 
-                    <div
-                      className={`rounded-xl border p-3.5 ${
-                        theme === "dark"
-                          ? "border-zinc-800 bg-zinc-800/70"
-                          : "border-slate-200 bg-slate-50"
+                    {/* Overview */}
+                    <p
+                      className={`mt-3 text-sm leading-6 font-medium ${
+                        theme === "dark" ? "text-zinc-300" : "text-slate-700"
                       }`}
                     >
+                      {article.overview}
+                    </p>
+
+                    {/* Body paragraphs */}
+                    <div className="mt-3 space-y-2">
+                      {article.bodyParagraphs.map((paragraph, paragraphIndex) => (
+                        <p
+                          key={`${article.headline}-${paragraphIndex}`}
+                          className={`text-sm leading-6 ${
+                            theme === "dark" ? "text-zinc-400" : "text-slate-600"
+                          }`}
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+
+                    {/* Conclusion callout */}
+                    <div
+                      className={`mt-4 rounded-xl px-4 py-3 flex items-start gap-2.5 ${
+                        theme === "dark"
+                          ? "bg-brand-purple/10 border border-brand-purple/20"
+                          : "bg-brand-purple/5 border border-brand-purple/15"
+                      }`}
+                    >
+                      <span className="text-brand-purple mt-0.5 shrink-0">✦</span>
                       <p
-                        className={`text-sm italic leading-7 ${
-                          theme === "dark" ? "text-zinc-300" : "text-slate-700"
+                        className={`text-sm font-medium leading-6 ${
+                          theme === "dark" ? "text-zinc-200" : "text-slate-800"
                         }`}
                       >
                         {article.conclusion}

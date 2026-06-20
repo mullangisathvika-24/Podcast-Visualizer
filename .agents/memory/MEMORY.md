@@ -1,0 +1,2 @@
+- [Expo Web asset path interception](expo-web-asset-paths.md) — Expo Web dev server intercepts `/assets/*` URLs; must use absolute URLs for remote images.
+- [API server cwd vs monorepo root](api-server-cwd.md) — pnpm filter runs scripts from the package dir, not monorepo root; use `process.cwd() + "../sibling"` for cross-package paths.

@@ -14,7 +14,12 @@ export function usePodcasts() {
       const res = await fetch(`${getBaseUrl()}/api/podcasts`);
       if (!res.ok) throw new Error("Failed to fetch podcasts");
       const json = await res.json();
-      return (json.data ?? json) as PodcastAsset[];
+      const data = (json.data ?? json) as PodcastAsset[];
+      const base = getBaseUrl();
+      return data.map((p) => ({
+        ...p,
+        artworkUrl: p.artworkUrl?.startsWith("/") ? `${base}${p.artworkUrl}` : p.artworkUrl,
+      }));
     },
     staleTime: 5 * 60 * 1000,
   });

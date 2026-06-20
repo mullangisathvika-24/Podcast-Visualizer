@@ -75,6 +75,8 @@ export const SwipeTabs: React.FC<SwipeTabsProps> = ({
               className={`py-2 px-5 text-xs font-mono font-black uppercase tracking-wider rounded-xl transition-all cursor-pointer ${
                 isActive
                   ? "bg-brand-purple text-white shadow-md shadow-brand-purple/25"
+                  : theme === "dark"
+                  ? "bg-zinc-900 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:border-zinc-600 hover:text-zinc-100"
                   : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
               }`}
               aria-current={isActive ? "page" : undefined}
