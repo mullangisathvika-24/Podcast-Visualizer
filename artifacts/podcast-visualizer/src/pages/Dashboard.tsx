@@ -71,7 +71,7 @@ const renderPosterImageMockup = (
   isLarge: boolean,
   theme: "dark" | "light"
 ) => {
-  // Select gradient colors based on podcast ID
+  // ── DARK MODE: rich translucent gradients (unchanged) ──
   let gradientClasses = "from-violet-600/30 via-violet-950/20 to-indigo-950/40";
   let accentColor = "text-brand-purple";
 
@@ -101,22 +101,29 @@ const renderPosterImageMockup = (
     accentColor = "text-amber-400";
   }
 
-  // If in light mode, let's make the background lighter and super elegant
+  // ── LIGHT MODE: fully opaque solid pastel gradients — no /XX alpha suffixes ──
+  // FIX: removed all /50, /60, /70, /80 alpha modifiers that were making card
+  // backgrounds semi-transparent and bleeding the doodle layer through them.
   if (theme === "light") {
-    if (podcast.id.includes("2")) gradientClasses = "from-amber-50/70 to-amber-100/50";
-    else if (podcast.id.includes("3"))
-      gradientClasses = "from-emerald-50/70 to-emerald-100/50";
-    else if (podcast.id.includes("4")) gradientClasses = "from-sky-50/70 to-sky-100/50";
-    else if (podcast.id.includes("5"))
-      gradientClasses = "from-fuchsia-50/70 to-fuchsia-100/50";
-    else if (podcast.id.includes("6"))
-      gradientClasses = "from-teal-50/70 to-teal-100/50";
-    else if (podcast.id.includes("8")) gradientClasses = "from-red-50/70 to-red-100/50";
-    else if (podcast.id.includes("9"))
-      gradientClasses = "from-rose-50/70 to-rose-100/50";
-    else if (podcast.id.includes("10"))
-      gradientClasses = "from-amber-50/50 to-orange-100/30";
-    else gradientClasses = "from-violet-50/80 to-violet-100/60";
+    if (podcast.id.includes("2")) {
+      gradientClasses = "from-amber-50 to-amber-100";
+    } else if (podcast.id.includes("3")) {
+      gradientClasses = "from-emerald-50 to-emerald-100";
+    } else if (podcast.id.includes("4")) {
+      gradientClasses = "from-sky-50 to-sky-100";
+    } else if (podcast.id.includes("5")) {
+      gradientClasses = "from-fuchsia-50 to-fuchsia-100";
+    } else if (podcast.id.includes("6")) {
+      gradientClasses = "from-teal-50 to-teal-100";
+    } else if (podcast.id.includes("8")) {
+      gradientClasses = "from-red-50 to-red-100";
+    } else if (podcast.id.includes("9")) {
+      gradientClasses = "from-rose-50 to-rose-100";
+    } else if (podcast.id.includes("10")) {
+      gradientClasses = "from-amber-50 to-orange-100";
+    } else {
+      gradientClasses = "from-violet-50 to-violet-100";
+    }
   }
 
   return (
@@ -125,8 +132,10 @@ const renderPosterImageMockup = (
         theme === "dark" ? "bg-dark-bg border-dark-border" : "bg-slate-50 border-slate-200"
       } ${isLarge ? "h-[220px] sm:h-[340px] w-full" : "h-[70px] w-[100px]"}`}
     >
-      {/* Dynamic Background Gradients */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradientClasses} opacity-80`} />
+      {/* Dynamic Background Gradients
+          FIX: removed `opacity-80` — the gradient div is now fully opaque so the
+          card interior is not washed out or see-through in light mode. */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradientClasses}`} />
 
       {/* Blueprint Grid Mesh Accent */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,128,128,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,128,128,0.06)_1px,transparent_1px)] bg-[size:14px_24px]" />
@@ -271,14 +280,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
     fileType: string,
     contentGenerator: () => string
   ) => {
-    // Ensure buttons relying on this method always notify the user on failure.
-    // Also prevents silent failures where onToast might not run.
-
     if (downloadingResourceMap[resourceId] !== undefined) return;
 
     onToast("Preparing download.");
     setDownloadingResourceMap((prev) => ({ ...prev, [resourceId]: 5 }));
-
 
     setTimeout(() => {
       setDownloadingResourceMap((prev) => ({ ...prev, [resourceId]: 35 }));
@@ -311,13 +316,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
         onToast("Download failed.");
       }
 
-
-
       setTimeout(() => {
         setDownloadingResourceMap((prev) => {
-                const next = { ...prev };
-                delete next[resourceId];
-                return next;
+          const next = { ...prev };
+          delete next[resourceId];
+          return next;
         });
       }, 1500);
     }, 1400);
@@ -347,7 +350,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
     setGreeting(next);
     console.log("Greeting:", next);
   }, []);
-
 
   const firstName = session?.username ? session.username.trim().split(" ")[0] : "User";
 
@@ -418,22 +420,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
         `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
         "_blank"
       );
-
     } else if (platform === "WhatsApp") {
       window.open(
         `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`,
         "_blank"
       );
-
     } else if (platform === "Telegram") {
       window.open(
         `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
         "_blank"
       );
-
     } else {
       navigator.clipboard?.writeText(url);
-    onToast("Link copied.");
+      onToast("Link copied.");
     }
 
     setActiveShareId(null);
@@ -446,7 +445,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-onToast("Download complete.");
+    onToast("Download complete.");
   };
 
   const handleVideoShare = async () => {
@@ -459,7 +458,6 @@ onToast("Download complete.");
           text: shareText,
           url: window.location.href,
         });
-
         return;
       } catch {
         // fall back to clipboard
@@ -471,7 +469,6 @@ onToast("Download complete.");
     }
   };
 
-  // Keep the rest of the render minimal for MVP build stability.
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 py-6" id="dashboard-mount">
       <header
@@ -489,64 +486,61 @@ onToast("Download complete.");
           <div className="flex items-center gap-3">
 
             <motion.div
+              className="overflow-hidden"
+              initial={false}
+              animate={{ width: isSearchFocused ? "240px" : "0px", opacity: isSearchFocused ? 1 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="h-10">
+                <input
+                  ref={searchInputRef}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onBlur={() => setIsSearchExpanded(false)}
+                  placeholder="Search"
+                  className={`h-10 w-full max-w-[240px] px-3 text-sm outline-none rounded-xl border shadow-sm transition-all min-w-0 ${theme === "dark"
+                      ? "bg-dark-surface border-dark-border text-slate-200 placeholder:text-slate-500"
+                      : "bg-white border-slate-200 text-slate-700 placeholder:text-slate-400"}`} />
+              </div>
+            </motion.div>
 
-            className="overflow-hidden"
-            initial={false}
-            animate={{ width: isSearchFocused ? "240px" : "0px", opacity: isSearchFocused ? 1 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="h-10">
-              <input
-                ref={searchInputRef}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onBlur={() => setIsSearchExpanded(false)}
-                placeholder="Search"
-                className={`h-10 w-full max-w-[240px] px-3 text-sm outline-none rounded-xl border shadow-sm transition-all min-w-0 ${theme === "dark"
-                    ? "bg-dark-surface border-dark-border text-slate-200 placeholder:text-slate-500"
-                    : "bg-white border-slate-200 text-slate-700 placeholder:text-slate-400"}`} />
-            </div>
-          </motion.div>
+            <button
+              type="button"
+              onClick={() => {
+                const next = !isSearchFocused;
+                setIsSearchFocused(next);
+                setIsSearchExpanded(next);
+              }}
+              className={`btn btn-icon border rounded-xl shadow-sm transition-all cursor-pointer ${
+                theme === "dark"
+                  ? "btn-dark bg-dark-surface hover:bg-dark-bg border-dark-border text-brand-purple"
+                  : "btn-light hover:bg-slate-50 border-light-border text-slate-600 hover:text-brand-purple"}
+                `}
+              title="Search"
+              aria-label="Search"
+              id="header-search-toggle"
+            >
+              <Search className="w-4 h-4" />
+            </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              const next = !isSearchFocused;
-              setIsSearchFocused(next);
-              setIsSearchExpanded(next);
-            }}
-            className={`btn btn-icon border rounded-xl shadow-sm transition-all cursor-pointer ${
-              theme === "dark"
-                ? "btn-dark bg-dark-surface hover:bg-dark-bg border-dark-border text-brand-purple"
-                : "btn-light hover:bg-slate-50 border-light-border text-slate-600 hover:text-brand-purple"}
+            <button
+              onClick={() => {
+                const nextStyle = theme === "dark" ? "light" : "dark";
+                setTheme(nextStyle);
+              }}
+              className={`btn btn-icon border rounded-xl shadow-sm transition-all cursor-pointer ${
+                theme === "dark"
+                  ? "btn-dark bg-dark-surface hover:bg-dark-bg border-dark-border text-brand-purple"
+                  : "btn-light hover:bg-slate-50 border-light-border text-slate-600 hover:text-brand-purple"}
               `}
-            title="Search"
-            aria-label="Search"
-            id="header-search-toggle"
-          >
-            <Search className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={() => {
-              const nextStyle = theme === "dark" ? "light" : "dark";
-              setTheme(nextStyle);
-            }}
-            className={`btn btn-icon border rounded-xl shadow-sm transition-all cursor-pointer ${
-              theme === "dark"
-                ? "btn-dark bg-dark-surface hover:bg-dark-bg border-dark-border text-brand-purple"
-                : "btn-light hover:bg-slate-50 border-light-border text-slate-600 hover:text-brand-purple"}
-            `}
-            title="Toggle color theme"
-            id="theme-mode-toggle"
-          >
-            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
+              title="Toggle color theme"
+              id="theme-mode-toggle"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+          </div>
         </div>
-        </div>
-
       </header>
-
 
       <SwipeTabs
         activeTab={activeTab}
