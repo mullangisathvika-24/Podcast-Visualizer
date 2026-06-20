@@ -576,48 +576,71 @@ export default function App() {
           ? "text-[#FFFFFF] selection:bg-brand-purple/20 fill-[#FFFFFF]"
           : "text-[#18181B] selection:bg-brand-purple/25"
       }`}
-      style={{ backgroundColor: theme === "dark" ? "#09090f" : "#fdf6ee" }}
+      style={{ backgroundColor: theme === "dark" ? "#09090f" : "#fffbf0" }}
     >
-      {/* Doodle background layer — tiles the pattern image at reduced opacity */}
-      <div
-        className="fixed inset-0 w-full h-full pointer-events-none"
-        style={{
-          backgroundImage: `url('/assets/${theme === "dark" ? "bg-dark" : "bg-light"}.png')`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "520px auto",
-          opacity: theme === "dark" ? 0.32 : 0.28,
-          zIndex: 0,
-        }}
-      />
+      {/* DARK MODE: neon doodle pattern layer */}
+      {theme === "dark" && (
+        <div
+          className="fixed inset-0 w-full h-full pointer-events-none"
+          style={{
+            backgroundImage: "url('/assets/bg-dark.png')",
+            backgroundRepeat: "repeat",
+            backgroundSize: "520px auto",
+            opacity: 0.32,
+            zIndex: 0,
+          }}
+        />
+      )}
 
-      {/* Gradient overlay — ensures cards and text stay readable over the pattern */}
-      <div
-        className="fixed inset-0 w-full h-full pointer-events-none"
-        style={{
-          background: theme === "dark"
-            ? "linear-gradient(160deg, rgba(9,9,20,0.72) 0%, rgba(15,8,35,0.62) 60%, rgba(9,9,20,0.78) 100%)"
-            : "linear-gradient(160deg, rgba(253,246,235,0.80) 0%, rgba(255,243,220,0.74) 50%, rgba(254,236,210,0.82) 100%)",
-          zIndex: 1,
-        }}
-      />
+      {/* DARK MODE: gradient overlay for readability */}
+      {theme === "dark" && (
+        <div
+          className="fixed inset-0 w-full h-full pointer-events-none"
+          style={{
+            background: "linear-gradient(160deg, rgba(9,9,20,0.72) 0%, rgba(15,8,35,0.62) 60%, rgba(9,9,20,0.78) 100%)",
+            zIndex: 1,
+          }}
+        />
+      )}
 
-      {/* Ambient brand-purple glow orbs — add depth on top of the pattern */}
-      <div
-        className="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full pointer-events-none"
-        style={{
-          background: theme === "dark" ? "rgba(139,92,246,0.12)" : "rgba(251,191,36,0.10)",
-          filter: "blur(120px)",
-          zIndex: 2,
-        }}
-      />
-      <div
-        className="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full pointer-events-none"
-        style={{
-          background: "rgba(99,102,241,0.05)",
-          filter: "blur(140px)",
-          zIndex: 2,
-        }}
-      />
+      {/* LIGHT MODE: pure warm radial gradient — amber top-left → peach → cream */}
+      {theme === "light" && (
+        <div
+          className="fixed inset-0 w-full h-full pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse 80% 60% at 15% 15%, rgba(251,191,36,0.45) 0%, rgba(253,186,116,0.30) 30%, rgba(255,237,213,0.50) 55%, rgba(255,251,240,0.10) 100%), radial-gradient(ellipse 60% 50% at 85% 85%, rgba(252,165,165,0.20) 0%, rgba(254,215,170,0.25) 40%, rgba(255,251,240,0.05) 100%)",
+            zIndex: 0,
+          }}
+        />
+      )}
+
+      {/* DARK MODE ambient purple orbs */}
+      {theme === "dark" && (
+        <>
+          <div
+            className="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full pointer-events-none"
+            style={{ background: "rgba(139,92,246,0.12)", filter: "blur(120px)", zIndex: 2 }}
+          />
+          <div
+            className="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full pointer-events-none"
+            style={{ background: "rgba(99,102,241,0.05)", filter: "blur(140px)", zIndex: 2 }}
+          />
+        </>
+      )}
+
+      {/* LIGHT MODE ambient warm orbs — amber top-left, peach bottom-right */}
+      {theme === "light" && (
+        <>
+          <div
+            className="fixed top-[-15%] left-[-10%] w-[55vw] h-[55vw] rounded-full pointer-events-none"
+            style={{ background: "rgba(251,191,36,0.22)", filter: "blur(130px)", zIndex: 1 }}
+          />
+          <div
+            className="fixed bottom-[-15%] right-[-10%] w-[50vw] h-[50vw] rounded-full pointer-events-none"
+            style={{ background: "rgba(249,115,22,0.12)", filter: "blur(150px)", zIndex: 1 }}
+          />
+        </>
+      )}
 
       {/* Primary Toaster element */}
       <Toast message={toast} onClear={() => setToast(null)} />
