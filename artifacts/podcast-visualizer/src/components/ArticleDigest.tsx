@@ -202,7 +202,7 @@ export const ArticleDigest: React.FC<ArticleDigestProps> = ({ theme = "dark", on
       >
         {/* Unified title for the Articles card */}
         <div className="px-1">
-          <h3 className="text-xl sm:text-2xl font-semibold tracking-tight">{EPISODE_TITLE}</h3>
+          <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold tracking-tight leading-tight whitespace-normal">Welcome to Podcast Visualizer</h3>
         </div>
 
         <div className="space-y-4">

@@ -79,11 +79,11 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
         }`}
       >
         <h2
-          className={`mt-2 text-2xl font-bold tracking-tight sm:text-3xl ${
+          className={`mt-2 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight leading-tight whitespace-normal ${
             isDark ? "text-zinc-100" : "text-slate-900"
           }`}
         >
-          {EPISODE_TITLE}
+          Welcome to Podcast Visualizer
         </h2>
       </div>
 
