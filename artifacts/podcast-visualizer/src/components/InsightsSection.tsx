@@ -73,20 +73,6 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
         isDark ? "border-slate-700 bg-black" : "border-slate-200 bg-white"
       }`}
     >
-      <div
-        className={`rounded-2xl border p-4 sm:p-6 ${
-          isDark ? "border-slate-700 bg-slate-900" : "border-slate-200 bg-slate-50"
-        }`}
-      >
-        <h2
-          className={`mt-2 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight leading-tight whitespace-normal ${
-            isDark ? "text-zinc-100" : "text-slate-900"
-          }`}
-        >
-          Welcome to Podcast Visualizer
-        </h2>
-      </div>
-
       {/* Two-column on md+: poster left, metadata + actions right. Stacks on mobile. */}
       <div
         className={`rounded-2xl border p-3 sm:p-4 flex flex-col md:flex-row md:items-start gap-4 md:gap-6 ${
@@ -138,8 +124,15 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
           </div>
         </div>
 
-        {/* ── Right column: counter, title, divider, actions ── */}
+        {/* ── Right column: episode title, counter, subtitle, divider, actions ── */}
         <div className="flex flex-1 flex-col gap-4 md:pt-1">
+          <h2
+            className={`text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight leading-tight whitespace-normal ${
+              isDark ? "text-zinc-100" : "text-slate-900"
+            }`}
+          >
+            {EPISODE_TITLE}
+          </h2>
           <div>
             <p
               className={`text-[11px] font-semibold uppercase tracking-[0.3em] ${

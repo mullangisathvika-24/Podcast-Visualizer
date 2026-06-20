@@ -33,13 +33,13 @@ export const VideosSection: React.FC<VideosSectionProps> = ({
           isDark ? "bg-black border-dark-border" : "bg-white border-slate-200"
         }`}
       >
-        {/* Title inside card */}
+        {/* Episode title inside card */}
         <h2
           className={`text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight leading-tight whitespace-normal mb-4 ${
             isDark ? "text-zinc-100" : "text-slate-900"
           }`}
         >
-          Welcome to Podcast Visualizer
+          {EPISODE_TITLE}
         </h2>
 
         {/* Divider */}
