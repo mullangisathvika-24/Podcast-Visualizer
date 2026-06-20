@@ -1,6 +1,0 @@
-{
-  "name": "MVP",
-  "description": "Knowledge companion for the One Impression podcast, delivering curated insights through visual posters, articles, and high-impact custom thumbnails.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

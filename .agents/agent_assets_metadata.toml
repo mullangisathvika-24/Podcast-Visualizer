@@ -1,8 +1,0 @@
-uploads = []
-outputs = []
-
-[[generated]]
-id = "NoTHMgojveqjG639RVSaU"
-uri = "file://artifacts/podcast-visualizer-mobile/assets/images/icon.png"
-type = "image"
-title = "generated_image"
