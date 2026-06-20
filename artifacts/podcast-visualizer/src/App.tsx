@@ -576,9 +576,9 @@ export default function App() {
           ? "text-[#FFFFFF] selection:bg-brand-purple/20 fill-[#FFFFFF]"
           : "text-[#18181B] selection:bg-brand-purple/25"
       }`}
-      style={{ backgroundColor: theme === "dark" ? "#09090f" : "#fffbf0" }}
+      style={{ backgroundColor: theme === "dark" ? "#09090f" : "#f9fafb" }}
     >
-      {/* DARK MODE: neon doodle pattern layer */}
+      {/* ── DARK MODE: neon doodle (strong, unchanged) ── */}
       {theme === "dark" && (
         <div
           className="fixed inset-0 w-full h-full pointer-events-none"
@@ -591,8 +591,6 @@ export default function App() {
           }}
         />
       )}
-
-      {/* DARK MODE: gradient overlay for readability */}
       {theme === "dark" && (
         <div
           className="fixed inset-0 w-full h-full pointer-events-none"
@@ -602,19 +600,6 @@ export default function App() {
           }}
         />
       )}
-
-      {/* LIGHT MODE: pure warm radial gradient — amber top-left → peach → cream */}
-      {theme === "light" && (
-        <div
-          className="fixed inset-0 w-full h-full pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse 80% 60% at 15% 15%, rgba(251,191,36,0.45) 0%, rgba(253,186,116,0.30) 30%, rgba(255,237,213,0.50) 55%, rgba(255,251,240,0.10) 100%), radial-gradient(ellipse 60% 50% at 85% 85%, rgba(252,165,165,0.20) 0%, rgba(254,215,170,0.25) 40%, rgba(255,251,240,0.05) 100%)",
-            zIndex: 0,
-          }}
-        />
-      )}
-
-      {/* DARK MODE ambient purple orbs */}
       {theme === "dark" && (
         <>
           <div
@@ -628,18 +613,40 @@ export default function App() {
         </>
       )}
 
-      {/* LIGHT MODE ambient warm orbs — amber top-left, peach bottom-right */}
+      {/* ── LIGHT MODE: soft pastel doodle + white overlay ── */}
+      {/* Layer 1 — gray-100→white gradient base */}
       {theme === "light" && (
-        <>
-          <div
-            className="fixed top-[-15%] left-[-10%] w-[55vw] h-[55vw] rounded-full pointer-events-none"
-            style={{ background: "rgba(251,191,36,0.22)", filter: "blur(130px)", zIndex: 1 }}
-          />
-          <div
-            className="fixed bottom-[-15%] right-[-10%] w-[50vw] h-[50vw] rounded-full pointer-events-none"
-            style={{ background: "rgba(249,115,22,0.12)", filter: "blur(150px)", zIndex: 1 }}
-          />
-        </>
+        <div
+          className="fixed inset-0 w-full h-full pointer-events-none"
+          style={{
+            background: "linear-gradient(160deg, #f3f4f6 0%, #ffffff 55%, #f9fafb 100%)",
+            zIndex: 0,
+          }}
+        />
+      )}
+      {/* Layer 2 — doodle at low opacity; desaturated + brightened to pastel */}
+      {theme === "light" && (
+        <div
+          className="fixed inset-0 w-full h-full pointer-events-none"
+          style={{
+            backgroundImage: "url('/assets/bg-light.png')",
+            backgroundRepeat: "repeat",
+            backgroundSize: "520px auto",
+            opacity: 0.13,
+            filter: "saturate(0.4) brightness(1.15) contrast(0.85)",
+            zIndex: 1,
+          }}
+        />
+      )}
+      {/* Layer 3 — semi-transparent white wash for readability */}
+      {theme === "light" && (
+        <div
+          className="fixed inset-0 w-full h-full pointer-events-none"
+          style={{
+            background: "rgba(255,255,255,0.58)",
+            zIndex: 2,
+          }}
+        />
       )}
 
       {/* Primary Toaster element */}

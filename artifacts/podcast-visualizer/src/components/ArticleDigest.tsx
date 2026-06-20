@@ -192,12 +192,12 @@ export const ArticleDigest: React.FC<ArticleDigestProps> = ({ theme = "dark", on
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 py-6">
+    <div className={`w-full max-w-6xl mx-auto ${theme === "dark" ? "px-4 sm:px-6 py-6" : "px-4 sm:px-8 py-8"}`}>
       <div
-        className={`rounded-3xl border p-5 sm:p-6 transition-all duration-300 ${
+        className={`rounded-3xl border transition-all duration-300 ${
           theme === "dark"
-            ? "border-zinc-800 bg-zinc-900/80 text-zinc-100 shadow-[0_10px_40px_rgba(0,0,0,0.22)]"
-            : "border-slate-200 bg-white text-slate-900 shadow-[0_10px_30px_rgba(15,23,42,0.06)]"
+            ? "border-zinc-800 bg-zinc-900/80 text-zinc-100 shadow-[0_10px_40px_rgba(0,0,0,0.22)] p-5 sm:p-6"
+            : "border-slate-200 bg-white/90 text-slate-900 shadow-[0_10px_30px_rgba(15,23,42,0.06)] p-6 sm:p-8"
         }`}
       >
         {/* Episode title for the Articles card */}

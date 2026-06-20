@@ -29,8 +29,10 @@ export const VideosSection: React.FC<VideosSectionProps> = ({
     <div className="mb-12 transition-all duration-300">
       {/* Merged: title + thumbnail in a single card */}
       <div
-        className={`rounded-[24px] border shadow-sm p-4 sm:p-6 ${
-          isDark ? "bg-black border-dark-border" : "bg-white border-slate-200"
+        className={`rounded-[24px] border shadow-sm ${
+          isDark
+            ? "bg-black border-dark-border p-4 sm:p-6"
+            : "bg-white/90 border-slate-200 p-6 sm:p-8"
         }`}
       >
         {/* Episode title inside card */}

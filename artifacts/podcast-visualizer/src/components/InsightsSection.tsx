@@ -69,8 +69,10 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
 
   return (
     <section
-      className={`mx-auto flex w-full max-w-[480px] flex-col gap-5 rounded-[28px] border p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:p-5 ${
-        isDark ? "border-slate-700 bg-black" : "border-slate-200 bg-white"
+      className={`mx-auto flex w-full max-w-[480px] flex-col gap-5 rounded-[28px] border shadow-[0_20px_60px_rgba(15,23,42,0.08)] ${
+        isDark
+          ? "border-slate-700 bg-black p-4 sm:p-5"
+          : "border-slate-200 bg-white/90 p-5 sm:p-7"
       }`}
     >
       {/* 1. Title — forced 2-line break at natural midpoint */}
