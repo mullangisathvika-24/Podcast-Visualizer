@@ -576,7 +576,7 @@ export default function App() {
           ? "text-[#FFFFFF] selection:bg-brand-purple/20 fill-[#FFFFFF]"
           : "text-[#18181B] selection:bg-brand-purple/25"
       }`}
-      style={{ backgroundColor: theme === "dark" ? "#09090f" : "#f5f4ff" }}
+      style={{ backgroundColor: theme === "dark" ? "#09090f" : "#fdf6ee" }}
     >
       {/* Doodle background layer — tiles the pattern image at reduced opacity */}
       <div
@@ -585,7 +585,7 @@ export default function App() {
           backgroundImage: `url('/assets/${theme === "dark" ? "bg-dark" : "bg-light"}.png')`,
           backgroundRepeat: "repeat",
           backgroundSize: "520px auto",
-          opacity: theme === "dark" ? 0.32 : 0.42,
+          opacity: theme === "dark" ? 0.32 : 0.28,
           zIndex: 0,
         }}
       />
@@ -596,7 +596,7 @@ export default function App() {
         style={{
           background: theme === "dark"
             ? "linear-gradient(160deg, rgba(9,9,20,0.72) 0%, rgba(15,8,35,0.62) 60%, rgba(9,9,20,0.78) 100%)"
-            : "linear-gradient(160deg, rgba(248,247,255,0.70) 0%, rgba(238,235,255,0.62) 60%, rgba(248,247,255,0.72) 100%)",
+            : "linear-gradient(160deg, rgba(253,246,235,0.80) 0%, rgba(255,243,220,0.74) 50%, rgba(254,236,210,0.82) 100%)",
           zIndex: 1,
         }}
       />
@@ -605,7 +605,7 @@ export default function App() {
       <div
         className="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full pointer-events-none"
         style={{
-          background: theme === "dark" ? "rgba(139,92,246,0.12)" : "rgba(139,92,246,0.08)",
+          background: theme === "dark" ? "rgba(139,92,246,0.12)" : "rgba(251,191,36,0.10)",
           filter: "blur(120px)",
           zIndex: 2,
         }}
