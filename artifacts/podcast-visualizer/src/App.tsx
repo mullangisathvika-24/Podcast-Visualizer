@@ -620,23 +620,15 @@ export default function App() {
               zIndex: 0,
             }}
           />
-          {/* Layer 1 — pastel doodle, already soft-colored, no filter needed */}
+          {/* Layer 1 — pastel doodle, sharp & fully visible */}
           <div
             className="fixed inset-0 w-full h-full pointer-events-none"
             style={{
               backgroundImage: "url('/assets/bg-light-pastel.png')",
               backgroundRepeat: "repeat",
               backgroundSize: "600px auto",
-              opacity: 0.75,
+              opacity: 1,
               zIndex: 1,
-            }}
-          />
-          {/* Layer 2 — gentle white glaze for card readability */}
-          <div
-            className="fixed inset-0 w-full h-full pointer-events-none"
-            style={{
-              background: "rgba(255,255,255,0.22)",
-              zIndex: 2,
             }}
           />
         </>

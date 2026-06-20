@@ -64,7 +64,7 @@ export const SwipeTabs: React.FC<SwipeTabsProps> = ({
   return (
     <div className="w-full">
       {/* Desktop tab buttons */}
-      <div className="flex justify-center items-center gap-3 py-4 px-3 sm:px-6 border-y border-zinc-500/15 max-w-xl mx-auto flex-wrap">
+      <div className="flex justify-center items-center gap-3 py-4 px-3 sm:px-6 max-w-xl mx-auto flex-wrap">
         {TABS.map((tab) => {
           const isActive = tab.key === activeTab;
           return (
