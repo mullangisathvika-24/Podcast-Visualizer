@@ -570,24 +570,54 @@ export default function App() {
   };
 
   return (
-    <div className={`relative min-h-screen font-sans transition-colors duration-500 ease-in-out ${
-      theme === "dark" 
-        ? "bg-dark-bg text-[#FFFFFF] selection:bg-brand-purple/20 fill-[#FFFFFF]" 
-        : "bg-light-bg text-[#18181B] selection:bg-brand-purple/25"
-    } overflow-x-hidden`}>
-      
-      {/* Decorative ambient blurred vector orbs - Brand Purple themed */}
-      {theme === "dark" ? (
-        <>
-          <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-[#8B5CF6]/15 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] bg-indigo-600/5 rounded-full blur-[140px] pointer-events-none" />
-        </>
-      ) : (
-        <>
-          <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-[#8B5CF6]/10 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] bg-indigo-600/5 rounded-full blur-[140px] pointer-events-none" />
-        </>
-      )}
+    <div
+      className={`relative min-h-screen font-sans transition-colors duration-500 ease-in-out overflow-x-hidden ${
+        theme === "dark"
+          ? "text-[#FFFFFF] selection:bg-brand-purple/20 fill-[#FFFFFF]"
+          : "text-[#18181B] selection:bg-brand-purple/25"
+      }`}
+      style={{ backgroundColor: theme === "dark" ? "#09090f" : "#f5f4ff" }}
+    >
+      {/* Doodle background layer — tiles the pattern image at reduced opacity */}
+      <div
+        className="fixed inset-0 w-full h-full pointer-events-none"
+        style={{
+          backgroundImage: `url('/assets/${theme === "dark" ? "bg-dark" : "bg-light"}.png')`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "520px auto",
+          opacity: theme === "dark" ? 0.32 : 0.42,
+          zIndex: 0,
+        }}
+      />
+
+      {/* Gradient overlay — ensures cards and text stay readable over the pattern */}
+      <div
+        className="fixed inset-0 w-full h-full pointer-events-none"
+        style={{
+          background: theme === "dark"
+            ? "linear-gradient(160deg, rgba(9,9,20,0.72) 0%, rgba(15,8,35,0.62) 60%, rgba(9,9,20,0.78) 100%)"
+            : "linear-gradient(160deg, rgba(248,247,255,0.70) 0%, rgba(238,235,255,0.62) 60%, rgba(248,247,255,0.72) 100%)",
+          zIndex: 1,
+        }}
+      />
+
+      {/* Ambient brand-purple glow orbs — add depth on top of the pattern */}
+      <div
+        className="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full pointer-events-none"
+        style={{
+          background: theme === "dark" ? "rgba(139,92,246,0.12)" : "rgba(139,92,246,0.08)",
+          filter: "blur(120px)",
+          zIndex: 2,
+        }}
+      />
+      <div
+        className="fixed bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full pointer-events-none"
+        style={{
+          background: "rgba(99,102,241,0.05)",
+          filter: "blur(140px)",
+          zIndex: 2,
+        }}
+      />
 
       {/* Primary Toaster element */}
       <Toast message={toast} onClear={() => setToast(null)} />
