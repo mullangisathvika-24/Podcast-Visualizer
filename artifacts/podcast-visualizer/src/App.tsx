@@ -475,19 +475,18 @@ export default function App() {
     email: "",
   };
 
-
   // Theme State ("dark" | "light")
   const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   // Client data states (Prefilled with high-contrast preset fallbacks)
   const [podcasts, setPodcasts] = useState<PodcastAsset[]>(LOCAL_PRESET_PODCASTS);
-  
+
   const [selectedPodcastId, setSelectedPodcastId] = useState<string>(() => {
     return localStorage.getItem("castsketch_selected_podcast_id") || "";
   });
-  
+
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   const [activeTab, setActiveTab] = useState<"article" | "poster" | "video">(() => {
     const saved = localStorage.getItem("castsketch_active_tab");
     return (saved === "article" || saved === "poster" || saved === "video")
@@ -609,10 +608,10 @@ export default function App() {
         </>
       )}
 
-      {/* ── LIGHT MODE: pencil doodle softened to pastel, subtle gradient overlay ── */}
+      {/* ── LIGHT MODE: pastel doodle — sharp, no blur, no opacity reduction ── */}
       {theme === "light" && (
         <>
-          {/* Layer 0 — light gray→white base */}
+          {/* Layer 0 — solid light base, no transparency */}
           <div
             className="fixed inset-0 w-full h-full pointer-events-none"
             style={{
@@ -620,7 +619,7 @@ export default function App() {
               zIndex: 0,
             }}
           />
-          {/* Layer 1 — pastel doodle, sharp & fully visible */}
+          {/* Layer 1 — pastel doodle at full opacity, no filter, no blur */}
           <div
             className="fixed inset-0 w-full h-full pointer-events-none"
             style={{
@@ -628,6 +627,7 @@ export default function App() {
               backgroundRepeat: "repeat",
               backgroundSize: "600px auto",
               opacity: 1,
+              // ✅ NO filter, NO backdropFilter, NO WebkitBackdropFilter
               zIndex: 1,
             }}
           />
@@ -658,8 +658,6 @@ export default function App() {
         theme={theme}
         setTheme={setTheme}
       />
-
-
     </div>
   );
 }
