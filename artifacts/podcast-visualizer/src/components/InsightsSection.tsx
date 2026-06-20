@@ -69,139 +69,113 @@ export default function InsightsSection({ theme }: { theme?: "dark" | "light" })
 
   return (
     <section
-      className={`mx-auto flex w-full max-w-5xl flex-col gap-4 rounded-[28px] border p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:p-6 lg:p-8 ${
+      className={`mx-auto flex w-full max-w-5xl flex-col gap-6 rounded-[28px] border p-4 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:p-6 lg:p-8 ${
         isDark ? "border-slate-700 bg-black" : "border-slate-200 bg-white"
       }`}
     >
-      {/* Two-column on md+: poster left, metadata + actions right. Stacks on mobile. */}
-      <div
-        className={`rounded-2xl border p-3 sm:p-4 flex flex-col md:flex-row md:items-start gap-4 md:gap-6 ${
-          isDark ? "border-slate-700 bg-slate-900" : "border-slate-200 bg-slate-50"
+      {/* 1. Title */}
+      <h2
+        className={`text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight leading-tight whitespace-normal ${
+          isDark ? "text-zinc-100" : "text-slate-900"
         }`}
       >
-        {/* ── Poster frame — strict 4:5, fills column, never distorted ── */}
-        <div
-          className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white flex-shrink-0 w-full md:w-[320px] lg:w-[360px]"
-          style={{ aspectRatio: "4 / 5" }}
+        {EPISODE_TITLE}
+      </h2>
+
+      {/* 2. Poster image — strict 4:5, centred, never distorted */}
+      <div
+        className="relative mx-auto w-full overflow-hidden rounded-2xl border border-slate-200 bg-white"
+        style={{ aspectRatio: "4 / 5", maxWidth: "min(420px, 100%)" }}
+      >
+        <img
+          src={insight.posterFile}
+          alt={insight.subHeadline}
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          draggable={false}
+        />
+
+        <button
+          type="button"
+          onClick={showPrev}
+          aria-label="Previous poster"
+          className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-black/40 text-white transition hover:bg-black/60"
         >
-          <img
-            src={insight.posterFile}
-            alt={insight.subHeadline}
-            className="absolute inset-0 h-full w-full object-cover object-center"
-            draggable={false}
-          />
+          <ChevronLeft className="h-5 w-5" />
+        </button>
 
-          <button
-            type="button"
-            onClick={showPrev}
-            aria-label="Previous poster"
-            className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-black/40 text-white transition hover:bg-black/60"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
+        <button
+          type="button"
+          onClick={showNext}
+          aria-label="Next poster"
+          className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-black/40 text-white transition hover:bg-black/60"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
 
-          <button
-            type="button"
-            onClick={showNext}
-            aria-label="Next poster"
-            className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/70 bg-black/40 text-white transition hover:bg-black/60"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-
-          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-black/50 px-3 py-1.5">
-            {INSIGHTS.map((item, index) => (
-              <button
-                key={item.id}
-                type="button"
-                aria-label={`Go to poster ${item.id}`}
-                onClick={() => setActiveIndex(index)}
-                className={`h-2 rounded-full transition ${
-                  index === activeIndex ? "w-6 bg-white" : "w-2 bg-white/60"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* ── Right column: episode title, counter, subtitle, divider, actions ── */}
-        <div className="flex flex-1 flex-col gap-4 md:pt-1">
-          <h2
-            className={`text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight leading-tight whitespace-normal ${
-              isDark ? "text-zinc-100" : "text-slate-900"
-            }`}
-          >
-            {EPISODE_TITLE}
-          </h2>
-          <div>
-            <p
-              className={`text-[11px] font-semibold uppercase tracking-[0.3em] ${
-                isDark ? "text-zinc-400" : "text-slate-500"
-              }`}
-            >
-              Poster {insight.id} / {INSIGHTS.length}
-            </p>
-            <h3
-              className={`mt-1 text-xl font-semibold leading-snug ${
-                isDark ? "text-zinc-100" : "text-slate-900"
-              }`}
-            >
-              {insight.subHeadline}
-            </h3>
-          </div>
-
-          <div className={`h-px w-full ${isDark ? "bg-slate-700" : "bg-slate-200"}`} />
-
-          <div className="flex flex-wrap gap-3">
+        <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-black/50 px-3 py-1.5">
+          {INSIGHTS.map((item, index) => (
             <button
+              key={item.id}
               type="button"
-              onClick={handleDownload}
-              className={`btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium ${
-                isDark
-                  ? "btn-dark border-dark-border bg-dark-bg hover:bg-dark-bg/60 text-slate-200"
-                  : "btn-light border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
+              aria-label={`Go to poster ${item.id}`}
+              onClick={() => setActiveIndex(index)}
+              className={`h-2 rounded-full transition ${
+                index === activeIndex ? "w-6 bg-white" : "w-2 bg-white/60"
               }`}
-              aria-label="Download"
-            >
-              <Download className="h-4 w-4" />
-            </button>
-
-            <button
-              type="button"
-              onClick={handleShare}
-              className={`btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium ${
-                isDark
-                  ? "btn-dark border-dark-border bg-dark-bg hover:bg-dark-bg/60 text-slate-200"
-                  : "btn-light border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
-              }`}
-              aria-label="Share"
-            >
-              <Share2 className="h-4 w-4" />
-            </button>
-
-            <a
-              href={YOUTUBE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium bg-[#FF0000] hover:bg-[#FF0000]/90 border-transparent text-white"
-              aria-label="YouTube"
-              title="YouTube"
-            >
-              <img src="/assets/YOUTUBE.png" alt="YouTube" className="h-4 w-4" draggable={false} />
-            </a>
-
-            <a
-              href={SPOTIFY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium bg-[#1DB954] hover:bg-[#1DB954]/90 border-transparent text-white"
-              aria-label="Spotify"
-              title="Spotify"
-            >
-              <img src="/assets/spotify.png" alt="Spotify" className="h-4 w-4" draggable={false} />
-            </a>
-          </div>
+            />
+          ))}
         </div>
+      </div>
+
+      {/* 3. Action buttons — always horizontal, equal spacing */}
+      <div className="flex flex-row flex-wrap items-center justify-center gap-3">
+        <button
+          type="button"
+          onClick={handleDownload}
+          className={`btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium ${
+            isDark
+              ? "btn-dark border-dark-border bg-dark-bg hover:bg-dark-bg/60 text-slate-200"
+              : "btn-light border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
+          }`}
+          aria-label="Download"
+        >
+          <Download className="h-4 w-4" />
+        </button>
+
+        <button
+          type="button"
+          onClick={handleShare}
+          className={`btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium ${
+            isDark
+              ? "btn-dark border-dark-border bg-dark-bg hover:bg-dark-bg/60 text-slate-200"
+              : "btn-light border-slate-200 bg-white hover:bg-slate-50 text-slate-700"
+          }`}
+          aria-label="Share"
+        >
+          <Share2 className="h-4 w-4" />
+        </button>
+
+        <a
+          href={YOUTUBE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium bg-[#FF0000] hover:bg-[#FF0000]/90 border-transparent text-white"
+          aria-label="YouTube"
+          title="YouTube"
+        >
+          <img src="/assets/YOUTUBE.png" alt="YouTube" className="h-4 w-4" draggable={false} />
+        </a>
+
+        <a
+          href={SPOTIFY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn inline-flex items-center justify-center w-[72px] px-3 py-2.5 text-sm font-medium bg-[#1DB954] hover:bg-[#1DB954]/90 border-transparent text-white"
+          aria-label="Spotify"
+          title="Spotify"
+        >
+          <img src="/assets/spotify.png" alt="Spotify" className="h-4 w-4" draggable={false} />
+        </a>
       </div>
     </section>
   );
